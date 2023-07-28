@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-decoration: none !important;
+}
+
+body {
+  font-family: "DM Sans", sans-serif !important;
+}
+
+.scrollbody {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbody::-webkit-scrollbar {
+  display: none;
+}
+
+.link {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid #175616;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease-in-out 200ms;
+}
+
+input[type="checkbox"]::after {
+  font-family: "Font Awesome 5 free";
+  font-weight: 900;
+  content: "\f00c";
+  font-size: 17px;
+  color: white;
+  display: none;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #175616;
+}
+
+input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity ease-in-out 0.7s;
+}
+
+.slide-active {
+  opacity: 1;
+}
