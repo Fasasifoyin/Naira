@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-decoration: none !important;
+}
+
+body {
+  font-family: "DM Sans", sans-serif !important;
+}
+
+.scrollbody {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbody::-webkit-scrollbar {
+  display: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.notAllowed {
+  cursor: not-allowed;
+}
+
+.link {
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+}
+
+.link-navbar {
+  text-decoration: underline !important;
+  text-underline-offset: 8px;
+  text-decoration-color: #175616;
+  text-decoration-thickness: 2px !important;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid #175616;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease-in-out 200ms;
+}
+
+input[type="checkbox"].checkboxError {
+  border: 1px solid red !important;
+}
+
+input[type="checkbox"]::after {
+  font-family: "Font Awesome 5 free";
+  font-weight: 900;
+  content: "\f00c";
+  font-size: 17px;
+  color: white;
+  display: none;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #175616;
+}
+
+input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity ease-in-out 0.7s;
+}
+
+.slide-active {
+  opacity: 1;
+}
+
+.slide-text-box {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity ease-in-out 0.7s;
+}
+
+.slide-text-active {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+  z-index: 10;
+  transition: opacity ease-in 0.6s;
+}
+
+.cc-container {
+  max-width: 1440px !important;
+  width: 100% !important;
+  margin: 0 auto;
+}
+
+.page_alignment {
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .page_alignment {
+    padding: 0 3.125rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .page_alignment {
+    padding: 0 6.25rem !important;
+  }
+}
