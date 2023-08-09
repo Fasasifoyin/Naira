@@ -34,7 +34,7 @@ const Tags = ({ tags, setTags }) => {
   };
 
   return (
-    <Box>
+    <Box mb={"40px"}>
       <Box
         mb={"50px"}
         px={"20px"}
@@ -120,7 +120,7 @@ const Tags = ({ tags, setTags }) => {
         onClick={numberShown === length ? viewLess : increaseNumberShown}
       >
         <Text fontWeight={"medium"} fontSize={{ lg: "24px", base: "18px" }}>
-          {numberShown === length ? "View Less Tags" : "Show More Tags"}
+          {numberShown === length ? "View Less Tags" : "See More Tags"}
         </Text>
       </Box>
     </Box>

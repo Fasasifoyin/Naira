@@ -16,7 +16,7 @@ const Signup = () => {
     email: "",
     password: "",
     confirm: "",
-    agree: ""
+    agree: [],
   };
 
   const options = [

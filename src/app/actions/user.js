@@ -5,18 +5,31 @@ import { toast } from "react-hot-toast";
 export const signup = createAsyncThunk(
   "/user/signup",
   async (formData, { rejectWithValue }) => {
-    const { navigate } = formData;
+    const { navigate, password, username } = formData;
+    let token;
     try {
       const { data, status } = await api.signUp(formData);
       if (status === 201) {
-        toast.success("Sign up successful");
-        navigate("/login");
+        const { data: loginData, status: loginStatus } = await api.signIn({
+          username,
+          password,
+        });
+        if (loginStatus === 200) {
+          token = loginData.auth_token;
+          localStorage.setItem("nairatoken", loginData?.auth_token);
+          toast.success("Sign up successful");
+          navigate("/");
+        }
       }
-      return data;
+      return { ...data, token };
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message);
-      // rejectWithValue(error.response.data.message);
+      const outputError =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      toast.error(outputError);
+      return rejectWithValue(outputError);
     }
   }
 );
@@ -46,9 +59,8 @@ export const login = createAsyncThunk(
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message;
-      console.log(error);
       toast.error(outputError);
-      // rejectWithValue(error.response.data.message);
+      return rejectWithValue(outputError);
     }
   }
 );

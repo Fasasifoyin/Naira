@@ -23,7 +23,13 @@ const AccountLayout = ({ children, sliders }) => {
         >
           <Box mb={"50px"}>
             <Link to="/">
-              <Logo fs={"2.7em"} width={"34px"} height={"5px"} />
+              <Logo
+                color={"#175616"}
+                gap={"4px"}
+                fs={"2.7em"}
+                width={"34px"}
+                height={"5px"}
+              />{" "}
             </Link>
           </Box>
           {children}

@@ -13,12 +13,12 @@ const FormikCheckbox = (props) => {
   return (
     <Field name={name}>
       {({ field, meta }) => (
-        <FormControl>
+        <FormControl isInvalid={meta.error && meta.touched}>
           {label && <FormLabel>{label}</FormLabel>}
           <CheckboxGroup>
             {/* eslint-disable-next-line react/prop-types */}
             {options.map((each, index) => (
-              <Flex align={"center"} gap={"7px"} key={index}>
+              <Flex align={"center"} gap={"10px"} key={index}>
                 <input
                   type="checkbox"
                   {...field}

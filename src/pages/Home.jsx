@@ -1,18 +1,16 @@
-import { Box, Container, Flex } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { Token, User } from "../app/Slice/UserSlice";
+import { Box } from "@chakra-ui/react";
+import Navbar from "../components/layout/Navbar";
+import HomeFirstSection from "../components/Home/HomeFirstSection";
 
 const Home = () => {
-  const user = useSelector(User);
-  const token = useSelector(Token);
 
+  
   return (
     <>
-      <Container>
-        <Box>
-          <Flex>{token ? user.username : "No user"}</Flex>
-        </Box>
-      </Container>
+      <Navbar text={"black"} activeText={"#175616"} hover={"#175616"} />
+      <Box pos={"absolute"} top={"0"} left={"0"} w={"100%"}>
+        <HomeFirstSection/>
+      </Box>
     </>
   );
 };

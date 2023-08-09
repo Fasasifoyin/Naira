@@ -1,7 +1,4 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "../DefaultLayout/Layout";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -9,6 +6,10 @@ import Signup from "../pages/Signup";
 import { Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import CreateBlog from "../pages/CreateBlog";
+import New from "../pages/New";
+import Trending from "../pages/Trending";
+import Recent from "../pages/Recent";
+import DetailedPage from "../pages/DetailedPage";
 
 const routes = [
   {
@@ -32,6 +33,22 @@ const routes = [
         element: <CreateBlog />,
       },
       {
+        path: "new",
+        element: <New />,
+      },
+      {
+        path: "/trending",
+        element: <Trending />,
+      },
+      {
+        path: "/recent",
+        element: <Recent />,
+      },
+      {
+        path: "/:id",
+        element: <DetailedPage />,
+      },
+      {
         path: "*",
         element: <Navigate to="/" replace />,
       },
@@ -44,10 +61,7 @@ const Routespath = () => {
 
   return (
     <AnimatePresence>
-      <RouterProvider
-        router={router}
-      />
-      ;
+      <RouterProvider router={router} />;
     </AnimatePresence>
   );
 };

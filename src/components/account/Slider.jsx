@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Image, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom"
 
 // eslint-disable-next-line react/prop-types
 const Slider = ({ sliders }) => {
@@ -17,6 +18,7 @@ const Slider = ({ sliders }) => {
       {/* eslint-disable-next-line react/prop-types */}
       {sliders.map((each, index) => (
         <React.Fragment key={each._id}>
+          <Link to={`/blogs/${index}`}>
           <Box
             w={"100%"}
             h={"100%"}
@@ -30,18 +32,27 @@ const Slider = ({ sliders }) => {
               alt={each._id}
             />
           </Box>
+          </Link>
+ 
           <Box
             width={"70%"}
             h={"70%"}
+            pos={"absolute"}
+            top={"30%"}
+            left={"50%"}
+            transform={"translateX(-50%)"}
             display={"flex"}
             alignItems={"center"}
-            className={
-              slideIndex === index ? "slide-text-active" : "slide-text-box"
-            }
           >
-            <Text fontSize={"36px"} color={"white"}>
-              {each.text}
-            </Text>
+            <Box
+              className={
+                slideIndex === index ? "slide-text-active" : "slide-text-box"
+              }
+            >
+              <Text fontSize={"36px"} color={"white"}>
+                {each.text}
+              </Text>
+            </Box>
           </Box>
         </React.Fragment>
       ))}
