@@ -63,7 +63,6 @@ const Navbar = ({ button, logo, text, activeText, hover, textShadow }) => {
             <NavLink
               style={({ isActive }) => ({
                 color: isActive ? activeText : text,
-                
               })}
               key={each.path}
               to={each.path}
@@ -77,7 +76,7 @@ const Navbar = ({ button, logo, text, activeText, hover, textShadow }) => {
         </Flex>
         <Flex gap={"20px"}>
           {token && (
-            <Link to="/profile">
+            <Link to="/blog/create">
               <Button
                 hideBelow={"lg"}
                 w={"94px"}
@@ -85,9 +84,12 @@ const Navbar = ({ button, logo, text, activeText, hover, textShadow }) => {
                 color={button ? "#175616" : "white"}
                 bg={button ? "white" : "#175616"}
                 rounded={0}
-                // _hover={{ bg: "#175616" }}
+                _hover={{
+                  bg: button ? "#175616" : "white",
+                  color: button ? "white" : "#175616",
+                }}
               >
-                PROFILE
+                CREATE
               </Button>
             </Link>
           )}
@@ -99,7 +101,10 @@ const Navbar = ({ button, logo, text, activeText, hover, textShadow }) => {
               color={button ? "#175616" : "white"}
               bg={button ? "white" : "#175616"}
               rounded={0}
-              // _hover={{ bg: "#175616" }}
+              _hover={{
+                bg: button ? "#175616" : "white",
+                color: button ? "white" : "#175616",
+              }}
               onClick={loggingOut}
             >
               LOGOUT
@@ -113,7 +118,10 @@ const Navbar = ({ button, logo, text, activeText, hover, textShadow }) => {
                 color={button ? "#175616" : "white"}
                 bg={button ? "white" : "#175616"}
                 rounded={0}
-                // _hover={{ bg: "#175616" }}
+                _hover={{
+                  bg: button ? "#175616" : "white",
+                  color: button ? "white" : "#175616",
+                }}
               >
                 LOGIN
               </Button>

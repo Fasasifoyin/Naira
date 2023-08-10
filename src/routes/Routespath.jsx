@@ -10,6 +10,7 @@ import New from "../pages/New";
 import Trending from "../pages/Trending";
 import Recent from "../pages/Recent";
 import DetailedPage from "../pages/DetailedPage";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = [
   {
@@ -30,7 +31,11 @@ const routes = [
       },
       {
         path: "/blog/create",
-        element: <CreateBlog />,
+        element: (
+          <PrivateRoute>
+            <CreateBlog />
+          </PrivateRoute>
+        ),
       },
       {
         path: "new",
@@ -43,8 +48,14 @@ const routes = [
         ],
       },
       {
-        path: "/trending",
+        path: "trending",
         element: <Trending />,
+        children: [
+          {
+            path: ":trendPage",
+            element: <Trending />,
+          },
+        ],
       },
       {
         path: "/recent",

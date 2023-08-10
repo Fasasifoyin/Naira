@@ -3,10 +3,9 @@ import * as api from "../api";
 
 export const getTrending = createAsyncThunk(
   "/trend/getTrending",
-  async (_, { rejectWithValue }) => {
+  async (page, { rejectWithValue }) => {
     try {
-      const { data } = await api.trendingBlogs();
-      console.log(data);
+      const { data } = await api.trendingBlogs(page);
       return data;
     } catch (error) {
       console.log(error);

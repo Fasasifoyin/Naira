@@ -26,7 +26,7 @@ const trendSlice = createSlice({
           ...state,
           loading: "success",
           trending: payload.results,
-          totalPages: Math.ceil(payload.count / 5),
+          totalPages: Math.ceil(payload.count / 12),
         };
       })
       .addCase(getTrending.rejected, (state, { payload }) => {

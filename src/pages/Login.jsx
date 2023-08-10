@@ -4,7 +4,7 @@ import AccountLayout from "../components/account/AccountLayout";
 import { Formik, Form } from "formik";
 import FormikControl from "../components/formik/FormikControl";
 import { loginSchema } from "../components/formik/FormikValidation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loginSliders } from "../utils/data";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,9 @@ import { UserLoading } from "../app/Slice/UserSlice";
 import { login } from "../app/actions/user";
 
 const Login = () => {
+  const { search } = useLocation();
+  const redirectURL = new URLSearchParams(search).get("redirect");
+  const redirect = redirectURL ? redirectURL : "/";
   const [remember, setRemember] = useState(
     localStorage.getItem("remember")
       ? JSON.parse(localStorage.getItem("remember"))
@@ -31,7 +34,7 @@ const Login = () => {
   const status = useSelector(UserLoading);
 
   const onSubmit = (values) => {
-    const formData = { ...values, navigate };
+    const formData = { ...values, navigate, redirect };
 
     dispatch(login(formData));
   };

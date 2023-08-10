@@ -37,12 +37,12 @@ export const signup = createAsyncThunk(
 export const login = createAsyncThunk(
   "/user/login",
   async (formData, { rejectWithValue }) => {
-    const { navigate, remember, username, password } = formData;
+    const { navigate, remember, username, password, redirect } = formData;
     try {
       const { data, status } = await api.signIn({ username, password });
       if (status === 200) {
         toast.success(`Welcome, ${username}`);
-        navigate("/");
+        navigate(redirect);
         if (remember.length > 0) {
           localStorage.setItem(
             "remember",

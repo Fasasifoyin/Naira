@@ -26,6 +26,8 @@ const BlogCard = ({ index, each }) => {
   const hour = date.getHours().toString();
   const minute = date.getMinutes().toString();
 
+  console.log(each)
+
   return (
     <Box
       className={

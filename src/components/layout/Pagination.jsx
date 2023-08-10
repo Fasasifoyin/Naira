@@ -49,7 +49,7 @@ const Pagination = ({ totalPages, newPage, route, initial }) => {
   return (
     <Flex gap={"8px"} align={"center"}>
       {pages.length > 5 &&
-        (page === 1 ? (
+        (!page ? (
           <Box
             border={"1px solid black"}
             px={"15px"}

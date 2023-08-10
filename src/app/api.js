@@ -15,7 +15,7 @@ API.interceptors.request.use((req) => {
 export const signUp = (form) => API.post("/api/auth/users/", form);
 export const signIn = (form) => API.post("/api/auth/token/login/", form);
 
-export const trendingBlogs = () => API.get("api/trending/?page=2");
+export const trendingBlogs = (page) => API.get(`api/trending/?page=${page}`);
 export const newBlogs = (page) => API.get(`api/latest/?page=${page}`);
 
 export const singleBlog = (id) => API.get(`api/single-post/${id}`);
