@@ -55,6 +55,7 @@ export const login = createAsyncThunk(
       }
       return data;
     } catch (error) {
+      console.log(error)
       const outputError =
         error.response && error.response.data.message
           ? error.response.data.message

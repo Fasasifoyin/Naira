@@ -22,31 +22,21 @@ import { useDispatch } from "react-redux";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import { create } from "../app/actions/Blogs";
+import { convertImageToBase64 } from "../utils/Convert"
 
 const CreateBlog = () => {
-  // const user = useSelector(User);
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState('');
   const [files, setFiles] = useState(null);
-  // const [blogImages, setBlogImages] = useState(["", "", "", ""]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!user.token) {
-  //     navigate(-1);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [user]);
 
   const initialValues = {
     title: "",
     body: "",
-    images: [""],
   };
 
-  const onUpload = (e) => {
-    setFiles(e.target.files);
-  };
+
+
 
   const onSubmit = async (values) => {
     const { title, body } = values;
@@ -55,32 +45,75 @@ const CreateBlog = () => {
       return toast.error("Please select a tag");
     }
 
-    if (!files) {
-      return toast.error("Please select at least one image");
-    }
+    const anyForm = new FormData()
+    anyForm.append("tags", tags)
+    anyForm.append("images", files)
+    anyForm.append("story", body)
+    anyForm.append("title", title)
+    // if (files.length < 1) {
+    //   return toast.error("Please select at least one image");
+    // }
 
-    const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append(`file${i + 1}`, files[i]);
-    }
+    console.log(files)
+
+    // let images = []
+
+    // for (let i = 0; i < files.length; i++) {
+    //   const base64 = await convertImageToBase64(files[i])
+    //   images.push(base64)
+    // }
+
+
+    // let arr = []
+    // try {
+    //   for (let i = 0; i < images.length; i++) {
+    //     const upload = await uploadCloudinary(images[i])
+    //     console.log('iuii', upload.data.secure_url)
+    //     const url = upload.data.secure_url
+    //     arr.push(url)
+    //   }
+
+    // const onUpload = async () => {
+    //   let base64 = []
+      
+  
+    // }
+
+
+
+    // const newArray = Object.entries(files)
+    // console.log(files)
+
+    // const nextArray = newArray.flatMap(each => {
+    //   if(Array.isArray(each)){
+    //     return each.map(one => one.name)
+    //   }
+    // })
+
+    // const images = nextArray.filter(each => each !== undefined)
+    // console.log(images)
+
+    // const formData = new FormData();
+    // for (let i = 0; i < files.length; i++) {
+    //   formData.append(`file${i + 1}`, files[i]);
+    // }
 
     // let formdata = new FormData();
     // for (let i = 0; i < images.length; i++) {
     //   formdata.append(`image`, images[0]);
     // }
 
-    console.log(formData);
+    // console.log(formData);
 
     // const filterImage = blogImages.filter((image) => image !== "");
 
-    // // const formData = {
-    // //   title,
-    // //   story: body,
-    // //   images,
-    // //   tags: tags.join(","),
-    // //   setSubmitting,
-    // // };
-    dispatch(create(formData))
+    // const formData = {
+    //   title,
+    //   story: body,
+    //   images: files,
+    //   tags: tags.join(","),
+    // };
+    dispatch(create(anyForm))
   };
 
   return (
@@ -199,7 +232,10 @@ const CreateBlog = () => {
                   </Field>
                 </Box>
                 <Box mb={"50px"}>
-                  <Input type="file" multiple onChange={(e) => onUpload(e)} />
+                  <Input
+                    type="file"
+                    onChange={(e) => setFiles(e.target.files[0])}
+                  />
                   {/* <AddImage
                     name="images"
                     setBlogImages={setBlogImages}

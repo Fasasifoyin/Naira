@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 
@@ -12,8 +12,12 @@ import {
 } from "../app/Slice/NewSlice";
 import { useEffect, useState } from "react";
 import ImageSlider from "../components/New/ImageSlider";
+import BlogCard from "../components/New/BlogCard";
+import { useParams } from "react-router-dom";
+import Pagination from "../components/layout/Pagination";
 
 const New = () => {
+  const { newPage } = useParams()
   const dispatch = useDispatch();
   const [sliderImages, setSliderImages] = useState([]);
   const newBlogs = useSelector(NewBlogs);
@@ -27,8 +31,8 @@ const New = () => {
   console.log(sliderImages, "213344");
 
   useEffect(() => {
-    dispatch(getNew());
-  }, [dispatch]);
+    dispatch(getNew(newPage || 1));
+  }, [dispatch, newPage]);
 
   useEffect(() => {
     if (newBlogs.length > 0) {
@@ -50,10 +54,21 @@ const New = () => {
         >
           <ImageSlider slides={sliderImages} />
         </Box>
-        <Box mb={"100px"}>
-
+        <Box mb={"100px"} className="cc-container page_alignment">
+        <Box  className="grid" mb={"30px"}>
+          {status === "success" &&
+            newBlogs.map((each, index) => (
+              <BlogCard key={each.id} index={index} each={each} />
+            ))}
         </Box>
-        <Footer/>
+        <Flex justifyContent={"center"}>
+            <Box>
+              <Pagination totalPages={total} newPage={newPage} route={"/new"} />
+            </Box>
+          </Flex>
+        </Box>
+   
+        <Footer />
       </Box>
     </>
   );

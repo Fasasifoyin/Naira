@@ -35,6 +35,12 @@ const routes = [
       {
         path: "new",
         element: <New />,
+        children: [
+          {
+            path: ":newPage",
+            element: <New />,
+          },
+        ],
       },
       {
         path: "/trending",

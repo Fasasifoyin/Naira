@@ -26,7 +26,7 @@ const newSlice = createSlice({
           ...state,
           loading: "success",
           new: payload.results,
-          totalPages: Math.ceil(payload.count / 5),
+          totalPages: Math.ceil(payload.count / 6),
         };
       })
       .addCase(getNew.rejected, (state, { payload }) => {

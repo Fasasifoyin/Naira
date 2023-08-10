@@ -21,9 +21,9 @@ export const getTrending = createAsyncThunk(
 
 export const getNew = createAsyncThunk(
   "/new/getNew",
-  async (_, { rejectWithValue }) => {
+  async (page, { rejectWithValue }) => {
     try {
-      const { data } = await api.newBlogs();
+      const { data } = await api.newBlogs(page);
       return data;
     } catch (error) {
       console.log(error);
@@ -58,9 +58,9 @@ export const create = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try{
       console.log(formData)
-      // const { tags, images, title, story} = formData
-      // const { data } = await api.createNewBlog({tags, images, title, story})
-      // console.log(data)
+      const { tags, images, title, story} = formData
+      const { data } = await api.createNewBlog({tags, images, title, story})
+      console.log(data)
     }catch(error){
       console.log(error);
       const outputError =
