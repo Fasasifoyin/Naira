@@ -6,7 +6,7 @@ export const getTrending = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await api.trendingBlogs();
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -45,8 +45,8 @@ export const getSingle = createAsyncThunk(
     } catch (error) {
       console.log(error);
       const outputError =
-        error.response && error.response.data.detail
-          ? error.response.data.detail
+        error.response && error.response.data.message
+          ? error.response.data.message
           : error.message;
       return rejectWithValue(outputError);
     }
@@ -54,14 +54,14 @@ export const getSingle = createAsyncThunk(
 );
 
 export const create = createAsyncThunk(
-  "/create/create", 
+  "/create/create",
   async (formData, { rejectWithValue }) => {
-    try{
-      console.log(formData)
-      const { tags, images, title, story} = formData
-      const { data } = await api.createNewBlog({tags, images, title, story})
-      console.log(data)
-    }catch(error){
+    try {
+      console.log(formData);
+      const { tags, images, title, story } = formData;
+      const { data } = await api.createNewBlog({ tags, images, title, story });
+      console.log(data);
+    } catch (error) {
       console.log(error);
       const outputError =
         error.response && error.response.data.detail
@@ -70,4 +70,4 @@ export const create = createAsyncThunk(
       return rejectWithValue(outputError);
     }
   }
-)
+);

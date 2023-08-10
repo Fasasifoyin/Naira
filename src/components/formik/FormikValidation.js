@@ -44,3 +44,10 @@ export const createValidation = yup.object().shape({
   title: yup.string().min(5).max(200).required("Give your post a headline"),
   body: yup.string().min(5).required("Write a post"),
 });
+
+export const commentValidation = yup.object().shape({
+  comment: yup
+    .string()
+    .min(10, "Your comment cannot be less than 10 characters")
+    .required("Comment"),
+});

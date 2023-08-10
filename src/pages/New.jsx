@@ -1,6 +1,11 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import Navbar from "../components/layout/Navbar";
+import ImageSlider from "../components/New/ImageSlider";
+import BlogCard from "../components/New/BlogCard";
 import Footer from "../components/layout/Footer";
+import Pagination from "../components/layout/Pagination";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getNew } from "../app/actions/Blogs";
@@ -10,25 +15,15 @@ import {
   Status,
   TotalPages,
 } from "../app/Slice/NewSlice";
-import { useEffect, useState } from "react";
-import ImageSlider from "../components/New/ImageSlider";
-import BlogCard from "../components/New/BlogCard";
-import { useParams } from "react-router-dom";
-import Pagination from "../components/layout/Pagination";
 
 const New = () => {
-  const { newPage } = useParams()
+  const { newPage } = useParams();
   const dispatch = useDispatch();
   const [sliderImages, setSliderImages] = useState([]);
   const newBlogs = useSelector(NewBlogs);
   const error = useSelector(Error);
   const status = useSelector(Status);
   const total = useSelector(TotalPages);
-  console.log(status);
-  console.log(newBlogs, total);
-  console.log(error);
-
-  console.log(sliderImages, "213344");
 
   useEffect(() => {
     dispatch(getNew(newPage || 1));
@@ -52,22 +47,35 @@ const New = () => {
           w={"100%"}
           h={{ md: "590px", base: "400px" }}
         >
-          <ImageSlider slides={sliderImages} />
+          {status === "pending" && (
+            <Box
+              w={"100%"}
+              h={"100%"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Heading>Loading...</Heading>
+            </Box>
+          )}
+          {status === "success" && <ImageSlider slides={sliderImages} />}
         </Box>
         <Box mb={"100px"} className="cc-container page_alignment">
-        <Box  className="grid" mb={"30px"}>
-          {status === "success" &&
-            newBlogs.map((each, index) => (
-              <BlogCard key={each.id} index={index} each={each} />
-            ))}
-        </Box>
-        <Flex justifyContent={"center"}>
+          <Box className="grid" mb={"30px"}>
+            {status === "pending" && <Text>Loading...</Text>}
+            {status === "failed" && <Text>{error}</Text>}
+            {status === "success" &&
+              newBlogs.map((each, index) => (
+                <BlogCard key={each.id} index={index} each={each} />
+              ))}
+          </Box>
+          <Flex justifyContent={"center"}>
             <Box>
               <Pagination totalPages={total} newPage={newPage} route={"/new"} />
             </Box>
           </Flex>
         </Box>
-   
+
         <Footer />
       </Box>
     </>

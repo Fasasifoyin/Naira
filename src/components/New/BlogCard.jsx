@@ -3,7 +3,6 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { parseISO } from "date-fns";
 import { Link } from "react-router-dom";
 
-
 const BlogCard = ({ index, each }) => {
   const months = [
     "January",
@@ -55,7 +54,7 @@ const BlogCard = ({ index, each }) => {
             w={"100%"}
             h={"100%"}
             objectFit={"cover"}
-            src={each.images[0].image_url}
+            src={each.images[0]?.image_url}
           />
         </Box>
       </Link>
@@ -82,7 +81,7 @@ const BlogCard = ({ index, each }) => {
         </Flex>
         <Text fontSize={"22.5px"} fontWeight={"bold"}>
           {each.title.length > 45
-            ? `${each.story.slice(0, 45)}...`
+            ? `${each.title.slice(0, 45)}...`
             : each.title}
         </Text>
         <Text fontSize={"15px"}>{each.story.slice(0, 120)}...</Text>
